@@ -1,0 +1,159 @@
+version 3
+run General-0-20251017-23:09:10-13324
+attr configname General
+attr datetime 20251017-23:09:10
+attr datetimef 20251017-230910
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network MailNet
+attr processid 13324
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config network MailNet
+config sim-time-limit 15s
+
+par MailNet.client1.ppp$o.channel typename "\"web_mail_transfer.P2P\""
+par MailNet.client1.ppp$o.channel disabled false
+attr mutable ""
+par MailNet.client1.ppp$o.channel delay 0.0005s
+attr mutable ""
+attr unit s
+par MailNet.client1.ppp$o.channel datarate 1e+08bps
+attr mutable ""
+attr unit bps
+par MailNet.client1.ppp$o.channel ber 0
+attr mutable ""
+par MailNet.client1.ppp$o.channel per 0
+attr mutable ""
+par MailNet.r.pppg$o[0].channel typename "\"web_mail_transfer.P2P\""
+par MailNet.r.pppg$o[0].channel disabled false
+attr mutable ""
+par MailNet.r.pppg$o[0].channel delay 0.0005s
+attr mutable ""
+attr unit s
+par MailNet.r.pppg$o[0].channel datarate 1e+08bps
+attr mutable ""
+attr unit bps
+par MailNet.r.pppg$o[0].channel ber 0
+attr mutable ""
+par MailNet.r.pppg$o[0].channel per 0
+attr mutable ""
+par MailNet.client2.ppp$o.channel typename "\"web_mail_transfer.P2P\""
+par MailNet.client2.ppp$o.channel disabled false
+attr mutable ""
+par MailNet.client2.ppp$o.channel delay 0.0005s
+attr mutable ""
+attr unit s
+par MailNet.client2.ppp$o.channel datarate 1e+08bps
+attr mutable ""
+attr unit bps
+par MailNet.client2.ppp$o.channel ber 0
+attr mutable ""
+par MailNet.client2.ppp$o.channel per 0
+attr mutable ""
+par MailNet.r.pppg$o[1].channel typename "\"web_mail_transfer.P2P\""
+par MailNet.r.pppg$o[1].channel disabled false
+attr mutable ""
+par MailNet.r.pppg$o[1].channel delay 0.0005s
+attr mutable ""
+attr unit s
+par MailNet.r.pppg$o[1].channel datarate 1e+08bps
+attr mutable ""
+attr unit bps
+par MailNet.r.pppg$o[1].channel ber 0
+attr mutable ""
+par MailNet.r.pppg$o[1].channel per 0
+attr mutable ""
+par MailNet.smtp.ppp$o.channel typename "\"web_mail_transfer.P2P\""
+par MailNet.smtp.ppp$o.channel disabled false
+attr mutable ""
+par MailNet.smtp.ppp$o.channel delay 0.0005s
+attr mutable ""
+attr unit s
+par MailNet.smtp.ppp$o.channel datarate 1e+08bps
+attr mutable ""
+attr unit bps
+par MailNet.smtp.ppp$o.channel ber 0
+attr mutable ""
+par MailNet.smtp.ppp$o.channel per 0
+attr mutable ""
+par MailNet.r.pppg$o[2].channel typename "\"web_mail_transfer.P2P\""
+par MailNet.r.pppg$o[2].channel disabled false
+attr mutable ""
+par MailNet.r.pppg$o[2].channel delay 0.0005s
+attr mutable ""
+attr unit s
+par MailNet.r.pppg$o[2].channel datarate 1e+08bps
+attr mutable ""
+attr unit bps
+par MailNet.r.pppg$o[2].channel ber 0
+attr mutable ""
+par MailNet.r.pppg$o[2].channel per 0
+attr mutable ""
+par MailNet.pop3.ppp$o.channel typename "\"web_mail_transfer.P2P\""
+par MailNet.pop3.ppp$o.channel disabled false
+attr mutable ""
+par MailNet.pop3.ppp$o.channel delay 0.0005s
+attr mutable ""
+attr unit s
+par MailNet.pop3.ppp$o.channel datarate 1e+08bps
+attr mutable ""
+attr unit bps
+par MailNet.pop3.ppp$o.channel ber 0
+attr mutable ""
+par MailNet.pop3.ppp$o.channel per 0
+attr mutable ""
+par MailNet.r.pppg$o[3].channel typename "\"web_mail_transfer.P2P\""
+par MailNet.r.pppg$o[3].channel disabled false
+attr mutable ""
+par MailNet.r.pppg$o[3].channel delay 0.0005s
+attr mutable ""
+attr unit s
+par MailNet.r.pppg$o[3].channel datarate 1e+08bps
+attr mutable ""
+attr unit bps
+par MailNet.r.pppg$o[3].channel ber 0
+attr mutable ""
+par MailNet.r.pppg$o[3].channel per 0
+attr mutable ""
+par MailNet.r typename "\"web_mail_transfer.Router\""
+par MailNet.r routes "\"1:0,2:1,3:2,4:3\""
+par MailNet.client1 typename "\"web_mail_transfer.MailClient\""
+par MailNet.client1 address 1
+par MailNet.client1 smtpAddr 3
+par MailNet.client1 pop3Addr 4
+par MailNet.client1 recipient "\"user2@mail.com\""
+par MailNet.client1 emailSubject "\"Hello from Client1\""
+par MailNet.client1 sendAt 1s
+attr unit s
+par MailNet.client1 checkAt 8s
+attr unit s
+par MailNet.client2 typename "\"web_mail_transfer.MailClient\""
+par MailNet.client2 address 2
+par MailNet.client2 smtpAddr 3
+par MailNet.client2 pop3Addr 4
+par MailNet.client2 recipient "\"user1@mail.com\""
+par MailNet.client2 emailSubject "\"Reply from Client2\""
+par MailNet.client2 sendAt 3s
+attr unit s
+par MailNet.client2 checkAt 10s
+attr unit s
+par MailNet.smtp typename "\"web_mail_transfer.SMTPServer\""
+par MailNet.smtp address 3
+par MailNet.smtp pop3Addr 4
+par MailNet.smtp processingTime 0.01s
+attr unit s
+par MailNet.pop3 typename "\"web_mail_transfer.POP3Server\""
+par MailNet.pop3 address 4
+par MailNet.pop3 retrievalTime 0.005s
+attr unit s
+par MailNet.pop3 maxMailSizeBytes 5000
+par MailNet typename "\"web_mail_transfer.MailNet\""
+
