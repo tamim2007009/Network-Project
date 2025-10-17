@@ -20,10 +20,12 @@ class POP3Server : public cSimpleModule {
 private:
   int addr = 0;
   map<string, vector<Email>> mailboxes; // user email -> list of emails
+  long totalMailCount = 0;              // total emails stored across all users
 
 protected:
   void initialize() override {
     addr = par("address");
+    totalMailCount = 0;
     EV_INFO << "POP3Server[" << addr << "] initialized\n";
   }
 
@@ -45,9 +47,12 @@ protected:
       email.arrivedAt = simTime();
 
       mailboxes[to].push_back(email);
+      totalMailCount++;
 
       EV_INFO << "POP3Server[" << addr << "] Stored email for " << to << "\n";
-      EV_INFO << "  Mailbox size: " << mailboxes[to].size() << " message(s)\n";
+      EV_INFO << "  Mailbox size (" << to << "): " << mailboxes[to].size()
+              << " message(s)\n";
+      EV_INFO << "  Total stored (all users): " << totalMailCount << "\n";
     } else if (msg->getKind() == MAIL_CHECK) {
       // Client checking for mail
       long src = SRC(msg);
@@ -60,6 +65,8 @@ protected:
         // Retrieve and send the first email
         Email email = it->second.front();
         it->second.erase(it->second.begin());
+        if (totalMailCount > 0)
+          totalMailCount--; // keep total in sync
 
         auto *retrieve = mk("MAIL_RETRIEVE", MAIL_RETRIEVE, addr, src);
         retrieve->addPar("from").setStringValue(email.from.c_str());
@@ -74,7 +81,8 @@ protected:
         EV_INFO << "POP3Server[" << addr << "] Sending email to " << user
                 << "\n";
         EV_INFO << "  " << it->second.size()
-                << " message(s) remaining in mailbox\n";
+                << " message(s) remaining in mailbox (" << user << ")\n";
+        EV_INFO << "  Total remaining (all users): " << totalMailCount << "\n";
       } else {
         // No mail available
         auto *none = mk("MAIL_NONE", MAIL_NONE, addr, src);
